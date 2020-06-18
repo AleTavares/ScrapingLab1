@@ -7,3 +7,5 @@
 - pip install nltk
 
 
+# Baixar e Instalar 
+- https://sites.google.com/a/chromium.org/chromedriver/home
