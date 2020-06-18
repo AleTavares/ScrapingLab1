@@ -2,35 +2,10 @@
 
 import bs4
 from bs4 import BeautifulSoup
-
 import selenium
 from selenium import webdriver
-
-import numpy as np
-
 import pandas as pd
 
-import matplotlib
-
-import matplotlib.pyplot as plt
-
-from collections import Counter
-
-# Com o NLTK fazemos Processamento de Linguagem Natural
-import nltk
-
-# Temos que fazer o download do dicionário e demais pacotes do NLTK
-nltk.download('all')
-
-# Tokenização é o processo de quebrar uma sentença em palavras, por exemplo.
-# Essa tarefa faz parte do processamento de linguagem natural. 
-# Vamos importar a função word_tokenize.
-from nltk import word_tokenize
-
-# As stopwords são palavras comuns, como artigos, advérbios ou conjunções.
-# As stopwords devem ser removidas no processamento de linguagem natural.
-# Vamos importar a função stopwords.
-from nltk.corpus import stopwords
 
 # Cria o driver de conexão. Será aberta outra janela do navegador. Não feche-a e mantenha aberta durante a extração.
 driver = webdriver.Chrome("./chromedriver")
