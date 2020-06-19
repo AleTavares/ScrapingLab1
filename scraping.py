@@ -16,7 +16,6 @@ dados = pd.DataFrame(columns = ["Titulo", "Localidade", "Empresa", "Salario", "T
 # Abre a conexão com o site e faz a pesquisa
 driver.get("https://www.indeed.com.br/jobs?q=data+science&l=brasil")
 driver.implicitly_wait(15)
-
 # Gravamos o resultado do scraping
 resultado = driver.find_elements_by_class_name("result")
 
@@ -55,7 +54,7 @@ for vaga in resultado:
     
     # Salário
     try:
-        salary = soup.find("a", class_ = "salary").text.replace('\n', '').strip()
+        salary = soup.find("span", class_ = "salaryText").text.replace('\n', '').strip()
     except:
         salary = 'None'
     
@@ -68,10 +67,20 @@ for vaga in resultado:
         
     # Aqui buscamos o sumário
     sum_div = vaga.find_elements_by_class_name("summary")[0]
-    sum_div.click()
+    # print(soup.find('li').text.replace('\n', '').strip())
+    # try:
+    #     # sum_div.click()
+    # except:
+    #     pass
+    # driver.implicitly_wait(15)
     
     # Descrição da vaga
-    job_desc = driver.find_element_by_id('vjs-desc').text
+    # try:
+    job_desc = soup.find('li').text.replace('\n', '').strip() #driver.find_element_by_id('vjs-desc')
+    # except:
+    #     print('erro')
+    #     job_desc = 'Sem Descrição'
+    #     # pass
     
     # Gravamos o resultado em nosso dataframe
     dados = dados.append({"Titulo":title, 
@@ -81,7 +90,8 @@ for vaga in resultado:
                           "Tipo_Pesquisa":sponsored, 
                           "Desc":job_desc}, 
                          ignore_index = True)
-
+    print(dados)
+    print(dados['Salario'])
 # Visualizamos os dados
 dados.head()
 

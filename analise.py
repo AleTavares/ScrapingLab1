@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 from collections import Counter
 
-
 # Com o NLTK fazemos Processamento de Linguagem Natural
 import nltk
 
@@ -25,17 +24,17 @@ from nltk.corpus import stopwords
 df = pd.read_csv("resultado/dados.csv", encoding = "utf-8")
 
 # Visualizamos os dados
-df.head()
+print(df.head())
 
 # Tarefa 1: Qual o tipo de vaga mostrado na pesquisa, orgânica ou patrocinada?
 print('Qual o tipo de vaga mostrado na pesquisa, orgânica ou patrocinada?')
-df["Tipo_Pesquisa"].value_counts()
+print(df["Tipo_Pesquisa"].value_counts())
 
 
 # Tarefa 2: 'Quais empresas tem o maior número de vagas listadas?'
 grupo1 = df.groupby("Empresa").count()["Titulo"].sort_values(ascending = False)[:20]
 print('Quais empresas tem o maior número de vagas listadas?')
-grupo1.head(5)
+print(grupo1.head(5))
 
 # Plotando
 grupo1.plot(kind = "bar", figsize = (18,6), color = "green", rot = 60)
@@ -45,7 +44,7 @@ grupo1.plot(kind = "bar", figsize = (18,6), color = "green", rot = 60)
 # Agrupando Localidades
 grupo2 = df.groupby("Localidade").count()["Titulo"].sort_values(ascending = False)[:20]
 print('Qual localidade tem o maior número de vagas listadas?')
-grupo2.head()
+print(grupo2.head())
 # Plotando
 grupo2.plot(kind = "bar", figsize = (18,6), color = "blue", rot = 30)
 
@@ -69,7 +68,7 @@ stop_words_en = stopwords.words('english')
 desc_vagas = df["Desc"].apply(elimina)
 
 # Exibindo as 10 primeiras vagas limpas
-desc_vagas.head(10)
+print(desc_vagas.head(10))
 
 # Vamos conta as descrições das vagas
 desc_itens = desc_vagas.apply(Counter).sum().items()
@@ -81,7 +80,7 @@ desc_itens = sorted(desc_itens, key = lambda kv: kv[1], reverse = True)
 desc_itens_serie = pd.Series({k: v for k, v in desc_itens})
 
 # Exibindo os 10 primeiros
-desc_itens_serie.head(10)
+print(desc_itens_serie.head(10))
 
 # Vamos criar uma lista de skills e pesquisar como eles aparecem nas descrições das vagas
 # Usamoas as palavras em minúsculo pois ao limpar os dados convertemos tudo para minúsculo
